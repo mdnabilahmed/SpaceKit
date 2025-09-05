@@ -1,3 +1,5 @@
+🌐 Access the App :- https://space-kit-beta.vercel.app/
+
 🚀 SpaceKit
 🌌 Overview
 
@@ -70,7 +72,6 @@ Start Frontend App:
 cd frontend
 npm run dev
 
-🌐 Access the App
 
-Open your browser and go to:
-http://localhost:3000
+
+
