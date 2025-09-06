@@ -29,7 +29,7 @@ const ProductCard = () => {
           >
             <div className="h-120">
               <img
-                src={`http://localhost:3000${p.image}`}
+                src={`https://api-spacekit.onrender.com${p.image}`}
                 alt={p.productName}
                 className="w-full h-[50vh] object-cover"
               />
