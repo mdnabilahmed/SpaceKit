@@ -6,7 +6,9 @@ const ProductCard = () => {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("https://api-spacekit.onrender.com");
+      const res = await axios.get(
+        "https://api-spacekit.onrender.com/api/products/send"
+      );
       setProducts(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
