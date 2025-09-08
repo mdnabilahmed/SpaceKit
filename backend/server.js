@@ -22,8 +22,11 @@ connectDB();
 // Routes
 app.use("/api/products", productRoutes);
 
+app.get("/api/health", (res, req) => {
+  res.json({ status: "ok", message: "Backed is alive!!" });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port ${PORT}`);
 });
-
