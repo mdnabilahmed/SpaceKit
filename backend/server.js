@@ -22,7 +22,7 @@ connectDB();
 // Routes
 app.use("/api/products", productRoutes);
 
-app.get("/api/health", (res, req) => {
+app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "Backed is alive!!" });
 });
 
