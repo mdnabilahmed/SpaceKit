@@ -31,7 +31,7 @@ const AddProduct = () => {
       formData.append("price", price);
       formData.append("image", imageFile);
 
-      await axios.post("http://localhost:3000/api/products/add", formData, {
+      await axios.post("https://space-kit-beta.vercel.app/api/products/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
