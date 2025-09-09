@@ -31,11 +31,15 @@ const AddProduct = () => {
       formData.append("price", price);
       formData.append("image", imageFile);
 
-      await axios.post("https://space-kit-beta.vercel.app/api/products/add", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "https://api-spacekit.onrender.com/api/products/add",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       alert("✅ Product saved successfully!");
 
