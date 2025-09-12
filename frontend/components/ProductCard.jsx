@@ -20,26 +20,27 @@ const ProductCard = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-3">
       {products.length > 0 ? (
         products.map((p) => (
           <div
             key={p._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden"
+            className="bg-white h-auto shadow-md rounded-lg overflow-hidden p-4 flex flex-col"
           >
-            <div className="h-120">
+            {/* Image Area (on top, fills container) */}
+            <div className="flex-1">
               <img
                 src={`https://api-spacekit.onrender.com${p.image}`}
                 alt={p.productName}
-                className="w-full h-[50vh] object-cover"
+                className="w-full h-full object-cover rounded-md"
               />
             </div>
-            <div className="p-4 flex justify-between items-center">
-              <div>
-                <h2 className="font-semibold">{p.productName}</h2>
-                <p className="text-gray-500">{p.color}</p>
-              </div>
-              <span className="font-bold">${p.price}</span>
+
+            {/* Text Area (at bottom) */}
+            <div className="p-2">
+              <h2 className="font-semibold">{p.productName}</h2>
+              <p className="text-gray-500">{p.color}</p>
+              <span className="font-bold block">${p.price}</span>
             </div>
           </div>
         ))
