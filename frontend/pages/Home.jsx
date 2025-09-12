@@ -2,23 +2,16 @@
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import ProductCard from "../components/ProductCard";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Footer from "../components/Footer";
 
 const Home = () => {
   const [imageErrors, setImageErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
   // Handle image loading errors
   const handleImageError = (imageName) => {
     setImageErrors((prev) => ({ ...prev, [imageName]: true }));
   };
-
-  // Simulate page loading
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Fallback image component
   const ImageWithFallback = ({
@@ -38,17 +31,6 @@ const Home = () => {
       {...props}
     />
   );
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your adventure...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen">
