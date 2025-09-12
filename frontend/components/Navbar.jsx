@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -23,6 +24,8 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const navigate = useNavigate();
+
   return (
     <motion.nav
       initial={{ y: 0 }}
@@ -32,22 +35,27 @@ const Navbar = () => {
     >
       <div className="p-5 mx-4 sm:mx-8 flex justify-between items-center bg-white/20 rounded-3xl backdrop-blur-lg">
         {/* Logo */}
-        <img
-          className="h-full w-[8rem]"
-          src="https://cdn.prod.website-files.com/66ec6afe3cc26899cbbb300a/66face70e9cfc8ce74be2c83_Logo%20Spacekit.svg"
-          alt="spacekit.."
-        />
+        <button
+          onClick={() => navigate("/")}
+          className="cursor-pointer flex items-center"
+        >
+          <img
+            className="w-auto" // fixed consistent size
+            src="https://cdn.prod.website-files.com/66ec6afe3cc26899cbbb300a/66face70e9cfc8ce74be2c83_Logo%20Spacekit.svg"
+            alt="spacekit logo"
+          />
+        </button>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-10 justify-center items-center text-black">
           <li>
-            <a href="#home">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a href="#products">Products</a>
+            <a href="/products">Products</a>
           </li>
           <li>
-            <a href="#faq">FAQ</a>
+            <a href="/faq">FAQ</a>
           </li>
           <li className="bg-white text-black text-[15px] px-5 py-1 rounded mr-2">
             <button>Contact Us</button>

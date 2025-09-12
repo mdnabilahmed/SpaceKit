@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [imageErrors, setImageErrors] = useState({});
+  const navigate = useNavigate();
 
   // Handle image loading errors
   const handleImageError = (imageName) => {
@@ -59,7 +61,7 @@ const Home = () => {
       {/* Marquee Section */}
       <section className="bg-white/90 backdrop-blur-sm">
         <div className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20">
-          <div className="overflow-hidden w-full max-w-[90%]">
+          <div className="overflow-hidden w-full max-w-[40%]">
             <motion.div
               className="whitespace-nowrap text-black font-medium text-sm sm:text-base"
               animate={{ x: ["100%", "-100%"] }}
@@ -150,9 +152,12 @@ const Home = () => {
                   <div className="absolute inset-0 bg-black/60"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <button className="flex items-center gap-3 bg-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/20">
-                      <span className="text-sm font-medium tracking-wide text-black">
+                      <button
+                        onClick={() => navigate("/products")}
+                        className="text-sm font-medium tracking-wide text-black cursor-pointer active:scale-90"
+                      >
                         LEARN MORE
-                      </span>
+                      </button>
                       <span className="text-lg">→</span>
                     </button>
                   </div>
@@ -290,7 +295,10 @@ const Home = () => {
                 All collection
               </p>
             </div>
-            <button className="w-full sm:w-auto px-8 py-4 rounded-lg bg-black text-white text-sm font-medium tracking-wide hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/20">
+            <button
+              onClick={() => navigate("/products")}
+              className="w-full sm:w-auto px-8 py-4 rounded-lg bg-black text-white text-sm font-medium tracking-wide hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 active:scale-95 cursor-pointer"
+            >
               SHOP NOW
             </button>
           </div>

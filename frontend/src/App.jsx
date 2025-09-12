@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import React from "react";
 
 const Home = React.lazy(() => import("../pages/Home"));
 const AddProduct = React.lazy(() => import("../pages/AddProduct"));
 const Login = React.lazy(() => import("../pages/Login"));
+const Products = React.lazy(() => import("../pages/Products"));
+const Faq = React.lazy(() => import("../pages/Faq"));
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Products" element={<Products />} />
+          <Route path="/Faq" element={<Faq />} />
         </Routes>
       </Suspense>
     </>

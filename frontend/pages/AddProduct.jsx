@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
@@ -7,6 +8,8 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [color, setColor] = useState("");
   const [imageFile, setImageFile] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -43,7 +46,6 @@ const AddProduct = () => {
 
       alert("✅ Product saved successfully!");
 
-      // Reset fields
       setProductName("");
       setColor("");
       setPrice("");
@@ -56,7 +58,14 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 relative">
+      <button
+        onClick={() => navigate("/")}
+        className="absolute top-6 left-6 px-4 py-2 border border-gray-800 text-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition"
+      >
+        ← Back
+      </button>
+
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-5xl p-10">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-10">
           Add New Product
@@ -66,7 +75,6 @@ const AddProduct = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-10"
         >
-          {/* Image Upload Section */}
           <div className="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 relative bg-gray-50 hover:border-blue-400 transition">
             <label className="block text-lg font-semibold text-gray-700 mb-4">
               Upload Product Image
@@ -104,7 +112,6 @@ const AddProduct = () => {
             )}
           </div>
 
-          {/* Product Details Section */}
           <div className="flex flex-col gap-6">
             <input
               value={productName}
