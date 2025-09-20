@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -10,30 +11,32 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://api-spacekit.onrender.com/api/contact/submitcontact",
         { name, email, message }
       );
 
-      alert("✅ Message submitted successfully!");
+      alert(response.data.message); // ✅ Show exact backend message
 
       setName("");
       setEmail("");
       setMessage("");
     } catch (error) {
       console.error(error);
-      alert("❌ Something went wrong while sending the message");
+
+      // Show exact backend error if available
+      const errMsg =
+        error.response?.data?.error ||
+        "❌ Something went wrong while sending the message";
+      alert(errMsg);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-
-      {/* Contact Form Section */}
       <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 lg:py-0">
         <div className="max-w-2xl w-full">
-          {/* Header */}
           <div className="text-center mb-12 lg:mb-16">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-gray-900 leading-tight">
               Have questions or <br />
@@ -41,9 +44,8 @@ const ContactUs = () => {
             </h1>
           </div>
 
-          {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-8 lg:space-y-10">
-            {/* Name Field */}
+            {/* Name */}
             <div>
               <label className="block text-lg lg:text-xl font-medium text-gray-900 mb-3 lg:mb-4">
                 Name
@@ -58,7 +60,7 @@ const ContactUs = () => {
               />
             </div>
 
-            {/* Email Field */}
+            {/* Email */}
             <div>
               <label className="block text-lg lg:text-xl font-medium text-gray-900 mb-3 lg:mb-4">
                 E-mail
@@ -73,7 +75,7 @@ const ContactUs = () => {
               />
             </div>
 
-            {/* Message Field */}
+            {/* Message */}
             <div>
               <label className="block text-lg lg:text-xl font-medium text-gray-900 mb-3 lg:mb-4">
                 Message
@@ -88,7 +90,7 @@ const ContactUs = () => {
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <div className="pt-8 lg:pt-12 text-center">
               <button
                 type="submit"
