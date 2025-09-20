@@ -16,7 +16,7 @@ const ContactUs = () => {
         { name, email, message }
       );
 
-      alert(response.data.message); // ✅ Show exact backend message
+      alert(response.data.message);
 
       setName("");
       setEmail("");
@@ -24,7 +24,6 @@ const ContactUs = () => {
     } catch (error) {
       console.error(error);
 
-      // Show exact backend error if available
       const errMsg =
         error.response?.data?.error ||
         "❌ Something went wrong while sending the message";
