@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -58,7 +58,9 @@ const Navbar = () => {
             <a href="/faq">FAQ</a>
           </li>
           <li className="bg-white text-black text-[15px] px-5 py-1 rounded mr-2">
-            <button>Contact Us</button>
+            <Link to="/contactus">
+              <button className=" cursor-pointer">Contact Us</button>
+            </Link>
           </li>
         </ul>
 

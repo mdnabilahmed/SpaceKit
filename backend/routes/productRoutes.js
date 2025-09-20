@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { addProduct, getProduct } from "../controllers/productController.js";
-import path from "path";
+
 
 // Configure Multer storage
 const storage = multer.diskStorage({
