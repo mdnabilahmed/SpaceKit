@@ -16,12 +16,10 @@ const ProductCard = () => {
     }
   };
 
-  // Handle image loading errors
   const handleImageError = (productId) => {
     setImageErrors((prev) => ({ ...prev, [productId]: true }));
   };
 
-  // Enhanced image component with fallback and responsive handling
   const ProductImage = ({ src, alt, productId }) => (
     <img
       src={imageErrors[productId] ? "/placeholder.jpg" : src}
@@ -37,15 +35,24 @@ const ProductCard = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 p-3 sm:p-4 md:p-5">
+    <div
+      className=" 
+        flex flex-col md:flex-row 
+        flex-wrap md:flex-nowrap 
+        justify-center items-center 
+        gap-x-[7px] px-[40px] w-full pt-[20px]
+      "
+    >
       {products.length > 0 ? (
         products.map((p) => (
           <div
             key={p._id}
-            className="bg-white h-auto shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col rounded-lg border border-gray-100"
+            className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300  
+                       overflow-hidden rounded-[12px] border border-gray-100 aspect-square 
+                       flex-shrink-0 w-full md:w-[300px] mx-[10px] md:mx-0"
           >
-            {/* Image Area - Enhanced responsive sizing */}
-            <div className="flex-1 aspect-square sm:aspect-[4/5] md:aspect-square lg:aspect-[4/5] xl:aspect-square overflow-hidden">
+            {/* 80% Image */}
+            <div className="h-[80%] w-full overflow-hidden flex items-center justify-center">
               <ProductImage
                 src={`https://api-spacekit.onrender.com${p.image}`}
                 alt={p.productName}
@@ -53,28 +60,30 @@ const ProductCard = () => {
               />
             </div>
 
-            {/* Text Area - Improved responsive typography and spacing */}
-            <div className="p-3 sm:p-4 md:p-4 lg:p-5 flex-shrink-0">
-              <h2 className="font-semibold text-sm sm:text-base md:text-base lg:text-lg text-gray-900 mb-1 sm:mb-2 line-clamp-2 leading-tight">
-                {p.productName}
-              </h2>
-              <p className="text-gray-500 text-xs sm:text-sm md:text-sm mb-2 sm:mb-3 capitalize">
-                {p.color}
-              </p>
-              <span className="font-bold text-base sm:text-lg md:text-lg lg:text-xl text-gray-900 block">
+            {/* 20% Details */}
+            <div className="h-[20%] w-full px-[10px] flex items-center justify-between">
+              {/* Left side: Name + Color */}
+              <div className="flex flex-col text-left">
+                <h2 className="font-semibold text-[14px] text-gray-900 uppercase tracking-wide truncate">
+                  {p.productName}
+                </h2>
+                <p className="text-gray-500 text-[11px] uppercase tracking-wider truncate">
+                  {p.color}
+                </p>
+              </div>
+
+              {/* Right side: Price */}
+              <span className="font-bold text-[14px] text-gray-900 text-right">
                 ${p.price}
               </span>
             </div>
           </div>
         ))
       ) : (
-        <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 xl:col-span-3 2xl:col-span-4 text-center py-8 sm:py-12">
-          <div className="flex flex-col items-center justify-center space-y-4">
-            {/* Loading spinner */}
-            <div className="animate-spin rounded-full h-8 w-8 sm:h-10 sm:w-10 border-b-2 border-gray-900"></div>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg">
-              Loading products...
-            </p>
+        <div className="w-full text-center py-[50px]">
+          <div className="flex flex-col items-center justify-center space-y-[16px]">
+            <div className="animate-spin rounded-full h-[40px] w-[40px] border-b-2 border-gray-900"></div>
+            <p className="text-gray-600 text-[16px]">Loading products...</p>
           </div>
         </div>
       )}

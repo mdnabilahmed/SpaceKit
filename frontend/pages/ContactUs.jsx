@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
@@ -16,7 +18,7 @@ const ContactUs = () => {
         { name, email, message }
       );
 
-      alert(response.data.message);
+      toast.success(response.data.message, { icon: false });
 
       setName("");
       setEmail("");
@@ -27,7 +29,7 @@ const ContactUs = () => {
       const errMsg =
         error.response?.data?.error ||
         "❌ Something went wrong while sending the message";
-      alert(errMsg);
+      toast.error(errMsg); // ❌ error toast
     }
   };
 
@@ -102,6 +104,8 @@ const ContactUs = () => {
         </div>
       </section>
       <Footer />
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

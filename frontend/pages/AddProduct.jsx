@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
@@ -23,7 +25,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     if (!imageFile) {
-      alert("Please upload an image");
+      toast.error("Please upload an image"); // ❌ error toast
       return;
     }
 
@@ -44,7 +46,7 @@ const AddProduct = () => {
         }
       );
 
-      alert("✅ Product saved successfully!");
+      toast.success("Product saved successfully!"); // ✅ success toast
 
       setProductName("");
       setColor("");
@@ -53,7 +55,7 @@ const AddProduct = () => {
       setPreview(null);
     } catch (error) {
       console.error(error);
-      alert("❌ Something went wrong while saving the product");
+      toast.error("❌ Something went wrong while saving the product"); // ❌ error toast
     }
   };
 
@@ -146,6 +148,9 @@ const AddProduct = () => {
           </div>
         </form>
       </div>
+
+      {/* Toastify container */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

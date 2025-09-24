@@ -8,7 +8,7 @@ const Products = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-40 flex justify-center py-4">
+      <div className="mt-25 flex justify-center py-4">
         <div className="overflow-hidden w-full max-w-[40%] pb-10">
           <motion.div
             className="whitespace-nowrap text-black font-medium text-sm sm:text-base"

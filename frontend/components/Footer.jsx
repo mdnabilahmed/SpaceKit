@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Footer = () => {
-  const [openIndex, setOpenIndex] = useState(0); // First item open by default
+  const [openIndex, setOpenIndex] = useState(null); // First item open by default
 
   const faqs = [
     {
@@ -36,7 +36,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-[#f3f3f3] min-h-screen w-full flex flex-col items-center pt-8 md:pt-16">
+    <div className="bg-white min-h-screen w-full flex flex-col items-center pt-8 md:pt-16">
       <h1 className="font-light text-2xl md:text-4xl pb-8 md:pb-16 text-center text-black tracking-wide px-4">
         Frequently asked questions
       </h1>
@@ -51,7 +51,7 @@ const Footer = () => {
               className={`min-h-[64px] md:h-16 cursor-pointer transition-all duration-200 ease-in-out ${
                 openIndex === index
                   ? "bg-blue-50 hover:bg-gray-200"
-                  : "bg-[#f3f3f3] hover:bg-gray-50"
+                  : "bg-white hover:bg-gray-50"
               }`}
               onClick={() => toggleFAQ(index)}
             >
@@ -76,7 +76,7 @@ const Footer = () => {
             </div>
 
             <div
-              className={`transition-all duration-500 ease-in-out overflow-hidden bg-[#f3f3f3] ${
+              className={`transition-all duration-500 ease-in-out overflow-hidden bg-white ${
                 openIndex === index
                   ? "max-h-40 md:max-h-32 opacity-100"
                   : "max-h-0 opacity-0"
@@ -99,7 +99,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Section */}
-      <div className="w-full bg-[#f3f3f3] mt-16 pt-16 pb-8">
+      <div className="w-full bg-white mt-16 pt-16 pb-8">
         <div className="max-w-6xl mx-auto px-4">
           {/* Logo */}
           <div className="flex justify-center mb-12">

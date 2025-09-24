@@ -47,7 +47,7 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-10 justify-center items-center text-black">
+        <ul className="hidden md:flex gap-7 justify-center items-center text-black">
           <li>
             <a href="/">Home</a>
           </li>
@@ -57,9 +57,14 @@ const Navbar = () => {
           <li>
             <a href="/faq">FAQ</a>
           </li>
-          <li className="bg-white text-black text-[15px] px-5 py-1 rounded mr-2">
+          <li className="bg-white text-black text-[15px] px-4 py-1 rounded">
             <Link to="/contactus">
               <button className=" cursor-pointer">Contact Us</button>
+            </Link>
+          </li>
+          <li className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded">
+            <Link to="/login">
+              <button className=" cursor-pointer">Login</button>
             </Link>
           </li>
         </ul>
