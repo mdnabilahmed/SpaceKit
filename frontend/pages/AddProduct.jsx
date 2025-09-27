@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
   const [productName, setProductName] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [color, setColor] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -25,16 +27,29 @@ const AddProduct = () => {
     e.preventDefault();
 
     if (!imageFile) {
-      toast.error("Please upload an image"); // ❌ error toast
+      toast.error("Please upload an image");
       return;
     }
 
     try {
-      const formData = new FormData();
-      formData.append("productName", productName);
-      formData.append("color", color);
-      formData.append("price", price);
-      formData.append("image", imageFile);
+      // const formData = new FormData();
+      // formData.append("productName", productName);
+      // formData.append("color", color);
+      // formData.append("price", price);
+      // formData.append("title", title);
+      // formData.append("description", description);
+      // formData.append("image", imageFile);
+
+      const formData = {
+        "productName" : productName,
+        "color": color,
+        "price": price,
+        "title": title,
+        "description": description,
+        "image": imageFile
+      };
+
+      console.log(formData);
 
       await axios.post(
         "https://api-spacekit.onrender.com/api/products/add",
@@ -46,16 +61,19 @@ const AddProduct = () => {
         }
       );
 
-      toast.success("Product saved successfully!"); // ✅ success toast
+      toast.success("✅ Product saved successfully!");
 
+      // reset states
       setProductName("");
       setColor("");
       setPrice("");
+      setTitle("");
+      setDescription("");
       setImageFile(null);
       setPreview(null);
     } catch (error) {
       console.error(error);
-      toast.error("❌ Something went wrong while saving the product"); // ❌ error toast
+      toast.error("❌ Something went wrong while saving the product");
     }
   };
 
@@ -77,6 +95,7 @@ const AddProduct = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-10"
         >
+          {/* Image upload section */}
           <div className="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 relative bg-gray-50 hover:border-blue-400 transition">
             <label className="block text-lg font-semibold text-gray-700 mb-4">
               Upload Product Image
@@ -114,6 +133,7 @@ const AddProduct = () => {
             )}
           </div>
 
+          {/* Product details */}
           <div className="flex flex-col gap-6">
             <input
               value={productName}
@@ -123,6 +143,7 @@ const AddProduct = () => {
               className="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg text-gray-700"
               required
             />
+
             <input
               value={color}
               onChange={(e) => setColor(e.target.value)}
@@ -131,6 +152,24 @@ const AddProduct = () => {
               className="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg text-gray-700"
               required
             />
+
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              placeholder="Title"
+              className="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg text-gray-700"
+              required
+            />
+
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              className="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg text-gray-700 h-24 resize-none"
+              required
+            />
+
             <input
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -139,6 +178,7 @@ const AddProduct = () => {
               className="border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg text-gray-700"
               required
             />
+
             <button
               type="submit"
               className="cursor-pointer active:scale-95 bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition shadow-md"
@@ -149,7 +189,6 @@ const AddProduct = () => {
         </form>
       </div>
 
-      {/* Toastify container */}
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );

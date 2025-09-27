@@ -2,7 +2,7 @@ import Product from "../models/product.js";
 
 const addProduct = async (req, res) => {
   try {
-    const { productName, color, price } = req.body;
+    const { productName, color, price, title, description } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" });
@@ -10,9 +10,20 @@ const addProduct = async (req, res) => {
 
     const imagePath = `/uploads/${req.file.filename}`;
 
+    console.log("Received product data:", {
+      productName,
+      color,
+      price,
+      title,
+      description,
+      imagePath,
+    });
+
     const newProduct = new Product({
       productName,
       color,
+      title,
+      description,
       price,
       image: imagePath,
     });
