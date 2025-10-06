@@ -200,21 +200,21 @@ const Home = () => {
           {/* Mindful Living Section */}
           <section className="flex items-center px-6 py-6">
             <div className="w-full">
-              <p className="tracking-[0.2em] text-black/60 mb-4 text-xs uppercase font-light">
+              <p className="tracking-[0.2em] text-black/60 mb-4 text-base uppercase font-light">
                 IDEAL FOR QUIET EVENINGS
               </p>
 
-              <h2 className="text-3xl font-light leading-[1.1] mb-6 text-black">
+              <h2 className="text-5xl font-light leading-[1.1] mb-6 text-black">
                 Mindful Living <br /> in Every Page
               </h2>
 
               <div className="space-y-3 mb-8 max-w-xl">
-                <p className="text-sm leading-relaxed text-black/70">
+                <p className="text-lg leading-relaxed text-black/70">
                   Whether you're looking to reflect on your past, gain clarity
                   on your goals, or simply find a few moments of calm, this
                   beautifully designed guide will inspire and motivate.
                 </p>
-                <p className="text-sm leading-relaxed text-black/70">
+                <p className="text-lg leading-relaxed text-black/70">
                   Let Journey Within be the companion that helps you navigate
                   life's ups and downs with grace and mindfulness.
                 </p>
@@ -249,23 +249,23 @@ const Home = () => {
           {/* Mug Section - Left aligned */}
           <section className="flex items-center px-6 py-6">
             <div className="w-full">
-              <p className="font-normal mb-2 text-xs uppercase tracking-[0.2em] text-black/60">
+              <p className="font-normal mb-2 text-base uppercase tracking-[0.2em] text-black/60">
                 QUALITY, SIMPLICITY, AND COMFORT
               </p>
 
-              <h2 className="text-3xl font-light mb-6 text-black leading-[1.1]">
+              <h2 className="text-5xl font-light mb-6 text-black leading-[1.1]">
                 Simplicity Meets <br /> Sophistication
               </h2>
 
               <div className="space-y-3 mb-8 max-w-xl">
-                <p className="text-sm leading-relaxed text-black/70">
+                <p className="text-lg leading-relaxed text-black/70">
                   Designed for those who appreciate the finer things in life,
                   this mug combines functionality with sleek, modern design. Its
                   smooth ceramic surface is easy to clean and resistant to
                   stains, while the comfortable handle ensures a perfect grip
                   every time.
                 </p>
-                <p className="text-sm leading-relaxed text-black/70">
+                <p className="text-lg leading-relaxed text-black/70">
                   Whether you're enjoying a quiet morning at home or a quick
                   break at the office, the Morning Brew Mug adds a touch of
                   sophistication to your daily routine.
@@ -289,30 +289,34 @@ const Home = () => {
       </section>
 
       {/* Products Section */}
-      <section className="bg-white py-10 md:py-16 lg:py-20 xl:py-24">
-        <div className="px-4 md:px-8 lg:px-12 xl:px-20 mx-auto max-w-xs md:max-w-5xl lg:max-w-3xl xl:max-w-4xl">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-10 lg:mb-16 gap-4 md:gap-6">
+      <section className="bg-white py-10 md:py-16 lg:py-20 xl:py-24 w-full">
+        <div className="px-4 md:px-8 lg:px-12 xl:px-20 mx-auto w-full">
+          {/* Header Section */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 lg:mb-16 gap-4 md:gap-6">
             <div>
-              <h2 className="text-xl md:text-3xl lg:text-4xl font-medium text-black mb-2">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium text-black mb-2">
                 × OUR PRODUCTS
               </h2>
               <p className="text-gray-500 text-sm md:text-base">
                 All collection
               </p>
             </div>
+
             <button
               onClick={() => navigate("/products")}
-              className="w-full md:w-auto px-6 md:px-8 py-3 md:py-4 rounded-lg bg-black text-white text-sm font-medium tracking-wide hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 active:scale-95 cursor-pointer"
+              className="w-full md:w-auto px-6 md:px-8 py-3 md:py-4 rounded-lg bg-black text-white text-sm md:text-base font-medium tracking-wide hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 active:scale-95 cursor-pointer"
             >
               SHOP NOW
             </button>
           </div>
 
-          <div>
+          {/* Product Cards */}
+          <div className="w-full">
             <ProductCard />
           </div>
         </div>
       </section>
+
       <Footer />
     </div>
   );
