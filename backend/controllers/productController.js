@@ -1,23 +1,15 @@
 import Product from "../models/product.js";
 
+// Add a product
 const addProduct = async (req, res) => {
   try {
-    const { productName, color, price, title, description } = req.body;
+    const { productName, color, price, title, description, images } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" });
     }
 
     const imagePath = `/uploads/${req.file.filename}`;
-
-    console.log("Received product data:", {
-      productName,
-      color,
-      price,
-      title,
-      description,
-      imagePath,
-    });
 
     const newProduct = new Product({
       productName,
@@ -26,6 +18,7 @@ const addProduct = async (req, res) => {
       description,
       price,
       image: imagePath,
+      images: images || [], // optional array of images
     });
 
     await newProduct.save();
@@ -36,6 +29,7 @@ const addProduct = async (req, res) => {
   }
 };
 
+// Get all products
 const getProduct = async (req, res) => {
   try {
     const products = await Product.find();
@@ -45,4 +39,15 @@ const getProduct = async (req, res) => {
   }
 };
 
-export { addProduct, getProduct };
+// Get single product by ID
+const getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching product" });
+  }
+};
+
+export { addProduct, getProduct, getProductById };

@@ -1,24 +1,23 @@
 import express from "express";
 import multer from "multer";
-import { addProduct, getProduct } from "../controllers/productController.js";
-
-// Configure Multer storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); 
-  },
-  filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + file.originalname;
-    cb(null, uniqueName);
-  },
-});
-
-const upload = multer({ storage });
+import {
+  addProduct,
+  getProduct,
+  getProductById,
+} from "../controllers/productController.js";
 
 const router = express.Router();
+
+// Multer setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
+const upload = multer({ storage });
 
 // Routes
 router.post("/add", upload.single("image"), addProduct);
 router.get("/send", getProduct);
+router.get("/send/:id", getProductById);
 
 export default router;
