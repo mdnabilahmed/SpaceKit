@@ -7,7 +7,7 @@ const Login = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-semibold text-gray-800">Admin login</h1>
           <p className="text-gray-500 mt-2">
-            Login to your produt control page
+            Login to your product control page
           </p>
         </div>
 

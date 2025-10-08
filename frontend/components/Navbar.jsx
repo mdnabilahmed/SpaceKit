@@ -62,10 +62,13 @@ const Navbar = () => {
               <button className=" cursor-pointer">Contact Us</button>
             </Link>
           </li>
-          <li className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded">
-            <Link to="/login">
-              <button className=" cursor-pointer">Login</button>
-            </Link>
+          <li>
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded cursor-pointer"
+            >
+              Login
+            </button>
           </li>
         </ul>
 
