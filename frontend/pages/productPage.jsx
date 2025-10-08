@@ -29,17 +29,17 @@ const ProductPage = () => {
       </div>
     );
 
-  const imageUrl = product.image?.startsWith("http")
+  const imageUrl = product.image?.startsWith("https")
     ? product.image
     : `https://api-spacekit.onrender.com${product.image}`;
 
   return (
     <div>
       <Navbar />
-      <section className="min-h-screen mt-12  bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+      <section className="mt-10 mb-10 py-16 px-4 sm:px-5 lg:px-50 pb-0">
         <Link
           to="/Products"
-          className="text-gray-600 hover:text-black inline-flex items-center mb-8 ml-4 transition-colors"
+          className="text-gray-600 hover:text-black inline-flex items-center mb-10 ml-4 transition-colors"
         >
           ← Back to Products
         </Link>
@@ -49,7 +49,7 @@ const ProductPage = () => {
             {/* Left side - Images */}
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="aspect-[4/3] bg-white rounded-lg overflow-hidden shadow-sm">
+              <div className="bg-white rounded-lg overflow-hidden shadow-sm">
                 <img
                   src={imageUrl}
                   alt={product.productName}
