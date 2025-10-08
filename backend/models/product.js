@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
   title: { type: String },
   description: { type: String },
   price: { type: Number, required: true },
-  image: { type: String }, // main image
+  image: { type: String }, // Cloudinary URL
   images: { type: [String], default: [] }, // optional multiple images
 });
 

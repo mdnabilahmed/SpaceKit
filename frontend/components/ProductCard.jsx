@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate(); // React Router hook to navigate
+  const navigate = useNavigate();
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("https://api-spacekit.onrender.com/api/products/send");
+      const res = await axios.get(
+        "https://api-spacekit.onrender.com/api/products/send"
+      );
       setProducts(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -24,7 +26,7 @@ const ProductCard = () => {
       {products.map((p) => (
         <div
           key={p._id}
-          onClick={() => navigate(`/product/${p._id}`)} // Navigate to ProductPage with ID
+          onClick={() => navigate(`/product/${p._id}`)}
           className="relative bg-gray-100 overflow-hidden group w-full aspect-[4/5] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
         >
           <img
