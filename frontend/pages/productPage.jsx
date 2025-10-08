@@ -36,7 +36,7 @@ const ProductPage = () => {
   return (
     <div>
       <Navbar />
-      <section className="min-h-screen mt-12 ml-10 bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+      <section className="min-h-screen mt-12  bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
         <Link
           to="/Products"
           className="text-gray-600 hover:text-black inline-flex items-center mb-8 ml-4 transition-colors"
@@ -44,7 +44,7 @@ const ProductPage = () => {
           ← Back to Products
         </Link>
 
-        <div className="max-w-8xl mx-auto">
+        <div className="max-w-8xl mx-auto ml-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left side - Images */}
             <div className="space-y-4">
