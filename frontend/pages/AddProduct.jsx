@@ -41,12 +41,12 @@ const AddProduct = () => {
       // formData.append("image", imageFile);
 
       const formData = {
-        "productName" : productName,
-        "color": color,
-        "price": price,
-        "title": title,
-        "description": description,
-        "image": imageFile
+        productName: productName,
+        color: color,
+        price: price,
+        title: title,
+        description: description,
+        image: imageFile,
       };
 
       console.log(formData);

@@ -38,6 +38,10 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+app.get("/api/products/test", (req, res) => {
+  res.json({ message: "Route works!" });
+});
+
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

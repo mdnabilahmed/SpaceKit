@@ -1,20 +1,16 @@
 import express from "express";
-import upload from "../middleware/upload.js";
 import {
   addProduct,
   getProducts,
   getProductById,
+  deleteProductById,
 } from "../controllers/productController.js";
 
 const router = express.Router();
 
-// Add a new product (upload image via Cloudinary)
-router.post("/add", upload.single("image"), addProduct);
-
-// Get all products
+router.post("/add", addProduct);
 router.get("/send", getProducts);
-
-// Get single product by ID
 router.get("/send/:id", getProductById);
+router.delete("/delete/:id", deleteProductById);
 
 export default router;
