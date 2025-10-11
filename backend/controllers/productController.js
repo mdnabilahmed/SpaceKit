@@ -7,20 +7,12 @@ const addProduct = async (req, res) => {
   try {
     const { productName, color, price, title, description } = req.body;
 
-    // ✅ Ensure file was received by multer
-    if (!req.file) {
-      return res.status(400).json({ message: "Image is required" });
-    }
-
-    // ✅ Upload to Cloudinary
     const uploadResult = await cloudinary.uploader.upload(req.file.path, {
       folder: "spacekit_products",
     });
 
-    // ✅ Remove temp file from server
     fs.unlinkSync(req.file.path);
 
-    // ✅ Save product in MongoDB
     const newProduct = new Product({
       productName,
       color,
