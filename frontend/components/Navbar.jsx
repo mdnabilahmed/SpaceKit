@@ -104,17 +104,20 @@ const Navbar = () => {
             onClick={() => setMenuOpen(false)}
             className="cursor-pointer self-end mb-4"
           />
-          <a href="#home" onClick={() => setMenuOpen(false)}>
+          <a href="/" onClick={() => setMenuOpen(false)}>
             Home
           </a>
-          <a href="#products" onClick={() => setMenuOpen(false)}>
+          <a href="/products" onClick={() => setMenuOpen(false)}>
             Products
           </a>
-          <a href="#faq" onClick={() => setMenuOpen(false)}>
+          <a href="/faq" onClick={() => setMenuOpen(false)}>
             FAQ
           </a>
           <button
-            onClick={() => setMenuOpen(false)}
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/contactus");
+            }}
             className="bg-black text-white px-5 py-2 rounded"
           >
             Contact Us
