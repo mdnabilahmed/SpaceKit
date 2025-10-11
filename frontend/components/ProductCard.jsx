@@ -9,7 +9,7 @@ const ProductCard = () => {
   const getProduct = async () => {
     try {
       const res = await axios.get(
-        "https://api-spacekit.onrender.com/api/products/send"
+        "https://api-spacekit.onrender.com/api/products"
       );
       setProducts(res.data);
     } catch (error) {

@@ -32,38 +32,28 @@ const AddProduct = () => {
     }
 
     try {
-      // const formData = new FormData();
-      // formData.append("productName", productName);
-      // formData.append("color", color);
-      // formData.append("price", price);
-      // formData.append("title", title);
-      // formData.append("description", description);
-      // formData.append("image", imageFile);
+      // ✅ Create form data for multipart upload
+      const formData = new FormData();
+      formData.append("productName", productName);
+      formData.append("color", color);
+      formData.append("price", price);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("image", imageFile); // 👈 must match multer field name
 
-      const formData = {
-        productName: productName,
-        color: color,
-        price: price,
-        title: title,
-        description: description,
-        image: imageFile,
-      };
-
-      console.log(formData);
-
-      await axios.post(
-        "https://api-spacekit.onrender.com/api/products/add",
+      // ✅ Send to backend
+      const response = await axios.post(
+        "https://localhost:5173/api/products/add",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
+      console.log("✅ Response:", response.data);
       toast.success("✅ Product saved successfully!");
 
-      // reset states
+      // ✅ Reset states
       setProductName("");
       setColor("");
       setPrice("");
@@ -72,13 +62,14 @@ const AddProduct = () => {
       setImageFile(null);
       setPreview(null);
     } catch (error) {
-      console.error(error);
+      console.error("❌ Upload error:", error.response?.data || error.message);
       toast.error("❌ Something went wrong while saving the product");
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 relative">
+      {/* 🔙 Back button */}
       <button
         onClick={() => navigate("/")}
         className="absolute top-6 left-6 px-4 py-2 border border-gray-800 text-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition"
@@ -86,6 +77,7 @@ const AddProduct = () => {
         ← Back
       </button>
 
+      {/* 🧩 Card */}
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-5xl p-10">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-10">
           Add New Product
@@ -95,7 +87,7 @@ const AddProduct = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-10"
         >
-          {/* Image upload section */}
+          {/* 🖼 Image Upload Section */}
           <div className="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 relative bg-gray-50 hover:border-blue-400 transition">
             <label className="block text-lg font-semibold text-gray-700 mb-4">
               Upload Product Image
@@ -133,7 +125,7 @@ const AddProduct = () => {
             )}
           </div>
 
-          {/* Product details */}
+          {/* 📝 Product Details Section */}
           <div className="flex flex-col gap-6">
             <input
               value={productName}
