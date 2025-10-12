@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ContactUsCard from "../components/ContactUsCard";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState(null);
@@ -287,6 +288,9 @@ const AddProduct = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        <ContactUsCard />
       </div>
     </div>
   );

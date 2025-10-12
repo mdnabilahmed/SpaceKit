@@ -10,13 +10,24 @@ const ContactUsCard = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
+        // Replace this URL with your actual deployed backend URL
         const response = await axios.get(
           "https://api-spacekit.onrender.com/api/contactus/getcontacts"
         );
-        setContacts(response.data); // Assuming the backend returns an array
+
+        // If your backend returns an object like { contacts: [...] }
+        // use: setContacts(response.data.contacts);
+        setContacts(response.data);
       } catch (err) {
-        console.error(err);
-        setError("Failed to fetch contact data");
+        console.error("Error fetching contacts:", err);
+
+        if (err.response) {
+          setError(`Server responded with status ${err.response.status}`);
+        } else if (err.request) {
+          setError("No response from server. Check your backend URL.");
+        } else {
+          setError(err.message);
+        }
       } finally {
         setLoading(false);
       }
