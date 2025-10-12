@@ -8,7 +8,9 @@ const ProductCard = () => {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get("https://api-spacekit.onrender.com/api/products");
+      const res = await axios.get(
+        "https://api-spacekit.onrender.com/api/products"
+      );
       setProducts(res.data || []);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -19,8 +21,19 @@ const ProductCard = () => {
     getProduct();
   }, []);
 
+  const getBase = () => {
+    if (
+      typeof process !== "undefined" &&
+      process.env &&
+      process.env.REACT_APP_API_BASE
+    ) {
+      return process.env.REACT_APP_API_BASE;
+    }
+    return "https://api-spacekit.onrender.com";
+  };
+
   const getImageSrc = (p) => {
-    const base = process.env.REACT_APP_API_BASE || "https://api-spacekit.onrender.com";
+    const base = getBase();
     if (!p) return `${base}/placeholder.png`;
     if (p.image && typeof p.image === "string") {
       if (p.image.startsWith("http")) return p.image;
@@ -50,7 +63,7 @@ const ProductCard = () => {
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = `${process.env.REACT_APP_API_BASE || "https://api-spacekit.onrender.com"}/placeholder.png`;
+              e.currentTarget.src = `${getBase()}/placeholder.png`;
             }}
           />
           <div
