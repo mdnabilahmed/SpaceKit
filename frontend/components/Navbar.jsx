@@ -118,7 +118,7 @@ const Navbar = () => {
               setMenuOpen(false);
               navigate("/contactus");
             }}
-            className="bg-black text-white px-5 py-2 rounded w-full"
+            className="bg-black text-white px-5 py-2 rounded"
           >
             Contact Us
           </button>
@@ -127,7 +127,7 @@ const Navbar = () => {
               setMenuOpen(false);
               navigate("/login");
             }}
-            className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded cursor-pointer w-full"
+            className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded cursor-pointer"
           >
             Login
           </button>

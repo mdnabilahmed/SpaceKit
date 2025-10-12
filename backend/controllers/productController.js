@@ -5,13 +5,12 @@ import fs from "fs";
 const addProduct = async (req, res) => {
   try {
     const { productName, color, price, title, description } = req.body;
-
     const uploadResult = await cloudinary.uploader.upload(req.file.path, {
       folder: "spacekit_products",
     });
-
-    fs.unlinkSync(req.file.path);
-
+    try {
+      fs.unlinkSync(req.file.path);
+    } catch (e) {}
     const newProduct = new Product({
       productName,
       color,
@@ -21,7 +20,6 @@ const addProduct = async (req, res) => {
       image: uploadResult.secure_url,
       images: [uploadResult.secure_url],
     });
-
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {

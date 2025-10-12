@@ -8,10 +8,8 @@ const ProductCard = () => {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get(
-        "https://api-spacekit.onrender.com/api/products"
-      );
-      setProducts(res.data);
+      const res = await axios.get("https://api-spacekit.onrender.com/api/products");
+      setProducts(res.data || []);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -20,6 +18,23 @@ const ProductCard = () => {
   useEffect(() => {
     getProduct();
   }, []);
+
+  const getImageSrc = (p) => {
+    const base = process.env.REACT_APP_API_BASE || "https://api-spacekit.onrender.com";
+    if (!p) return `${base}/placeholder.png`;
+    if (p.image && typeof p.image === "string") {
+      if (p.image.startsWith("http")) return p.image;
+      if (p.image.startsWith("/uploads")) return `${base}${p.image}`;
+    }
+    if (Array.isArray(p.images) && p.images.length) {
+      const first = p.images[0];
+      if (first && typeof first === "string") {
+        if (first.startsWith("http")) return first;
+        if (first.startsWith("/uploads")) return `${base}${first}`;
+      }
+    }
+    return `${base}/placeholder.png`;
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
@@ -30,9 +45,13 @@ const ProductCard = () => {
           className="relative bg-gray-100 overflow-hidden group w-full aspect-[4/5] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
         >
           <img
-            src={`https://api-spacekit.onrender.com${p.image}`}
-            alt={p.productName}
+            src={getImageSrc(p)}
+            alt={p.productName || "product"}
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = `${process.env.REACT_APP_API_BASE || "https://api-spacekit.onrender.com"}/placeholder.png`;
+            }}
           />
           <div
             className="absolute bottom-0 left-0 w-full bg-white flex justify-between items-center px-6 border-t border-gray-200"
