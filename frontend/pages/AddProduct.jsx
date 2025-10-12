@@ -108,7 +108,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 relative ">
       <button
         onClick={() => navigate("/")}
         className="absolute top-6 left-6 px-4 py-2 border border-gray-800 text-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition"
@@ -222,6 +222,10 @@ const AddProduct = () => {
 
       <ToastContainer position="top-right" autoClose={3000} />
 
+      <div className="mt-20">
+        <ContactUsCard />
+      </div>
+
       <div className="mt-20 w-full max-w-6xl">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           All Products
@@ -288,9 +292,6 @@ const AddProduct = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div>
-        <ContactUsCard />
       </div>
     </div>
   );
