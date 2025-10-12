@@ -49,9 +49,9 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative z-10 flex items-end justify-start h-screen px-4 md:px-8 lg:px-12 pb-6 md:pb-10 lg:pb-12">
+      <section className="relative z-10 flex items-end justify-start h-screen px-4 md:px-8 lg:px-12 pb-20 md:pb-5 lg:pb-12">
         <div className="max-w-xs md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-          <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-black font-light leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-black font-light leading-tight">
             Your Next Adventure <br />
             Starts With Us
           </h1>
@@ -60,7 +60,7 @@ const Home = () => {
 
       {/* Marquee Section */}
       <section className="bg-white/90 backdrop-blur-sm">
-        <div className="flex flex-col items-center justify-center py-8 md:py-16 lg:py-20">
+        <div className="flex flex-col items-center justify-center md:py-16 lg:py-20">
           {/* Responsive marquee */}
           <div className="overflow-hidden w-full max-w-[90%] md:max-w-[60%] lg:max-w-[50%] xl:max-w-[40%]">
             <motion.div
