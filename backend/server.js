@@ -6,6 +6,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/uploads", express.static(uploadsDir));
 connectDB();
 
 app.use("/api/products", productRoutes);
+app.use("/api/contactus", contactRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ API is running...");

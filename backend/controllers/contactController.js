@@ -1,31 +1,31 @@
 import Contact from "../models/contact.js";
 
-// Save contact form
-export const submitContact = async (req, res) => {
+const submitContact = async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
     if (!name || !email || !message) {
-      return res.json({ error: "All fields are required" });
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
-    res.json({ message: " Message submitted successfully" });
+    res.status(201).json({ message: "Message submitted successfully" });
   } catch (error) {
     console.error("Contact error:", error);
-    res.json({ error: error.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
-// Get all messages
-export const getContacts = async (req, res) => {
+const getContacts = async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
-    res.json(contacts);
+    res.status(200).json(contacts);
   } catch (error) {
     console.error("Get contacts error:", error);
-    res.json({ error: "Failed to fetch messages" });
+    res.status(500).json({ error: "Failed to fetch messages" });
   }
 };
+
+export { submitContact, getContacts };

@@ -9,17 +9,20 @@ const ContactUs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
       const response = await axios.post(
-        "https://api-spacekit.onrender.com/api/contact/submitcontact",
+        "https://api-spacekit.onrender.com/api/contactus/submitcontact",
         { name, email, message }
       );
 
       toast.success(response.data.message, { icon: false });
 
+      // Reset form
       setName("");
       setEmail("");
       setMessage("");
@@ -29,7 +32,9 @@ const ContactUs = () => {
       const errMsg =
         error.response?.data?.error ||
         "❌ Something went wrong while sending the message";
-      toast.error(errMsg); // ❌ error toast
+      toast.error(errMsg);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -85,7 +90,7 @@ const ContactUs = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Your message..."
-                rows={2}
+                rows={4}
                 className="w-full px-0 py-4 lg:py-5 text-base lg:text-lg text-gray-900 placeholder-gray-500 bg-transparent border-0 border-b-2 border-gray-300 focus:border-gray-900 focus:outline-none focus:ring-0 resize-none transition-colors duration-300"
                 required
               />
@@ -95,16 +100,20 @@ const ContactUs = () => {
             <div className="pt-8 lg:pt-12 text-center">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center px-12 lg:px-16 py-4 lg:py-5 bg-white text-gray-900 text-base lg:text-lg font-medium tracking-wide border-2 border-gray-900 rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 active:scale-95"
+                disabled={loading}
+                className={`inline-flex items-center justify-center px-12 lg:px-16 py-4 lg:py-5 bg-white text-gray-900 text-base lg:text-lg font-medium tracking-wide border-2 border-gray-900 rounded-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 active:scale-95 ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-gray-900 hover:text-white"
+                }`}
               >
-                CONTACT US
+                {loading ? "Sending..." : "CONTACT US"}
               </button>
             </div>
           </form>
         </div>
       </section>
       <Footer />
-
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
