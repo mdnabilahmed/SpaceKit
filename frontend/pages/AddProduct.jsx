@@ -32,30 +32,23 @@ const AddProduct = () => {
     }
 
     try {
-      // ✅ Correct: use FormData, not plain object
       const formData = new FormData();
       formData.append("productName", productName);
       formData.append("color", color);
       formData.append("price", price);
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("image", imageFile); // must match multer upload.single("image")
-
-      console.log("Uploading product...", formData);
+      formData.append("image", imageFile);
 
       await axios.post(
         "https://api-spacekit.onrender.com/api/products/add",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
       toast.success("✅ Product saved successfully!");
-
-      // Reset states
       setProductName("");
       setColor("");
       setPrice("");
@@ -67,7 +60,8 @@ const AddProduct = () => {
       console.error("Error uploading product:", error.response || error);
       toast.error(
         `❌ Error: ${
-          error.response?.data?.message || "Something went wrong while saving the product"
+          error.response?.data?.message ||
+          "Something went wrong while saving the product"
         }`
       );
     }
@@ -91,7 +85,6 @@ const AddProduct = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-10"
         >
-          {/* Image upload section */}
           <div className="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 relative bg-gray-50 hover:border-blue-400 transition">
             <label className="block text-lg font-semibold text-gray-700 mb-4">
               Upload Product Image
@@ -129,7 +122,6 @@ const AddProduct = () => {
             )}
           </div>
 
-          {/* Product details */}
           <div className="flex flex-col gap-6">
             <input
               value={productName}

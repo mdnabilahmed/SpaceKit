@@ -1,9 +1,16 @@
 import Product from "../models/product.js";
-import mongoose from "mongoose";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
 const addProduct = async (req, res) => {
   try {
     const { productName, color, price, title, description } = req.body;
+
+    const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+      folder: "spacekit_products",
+    });
+
+    fs.unlinkSync(req.file.path);
 
     const newProduct = new Product({
       productName,
@@ -11,13 +18,20 @@ const addProduct = async (req, res) => {
       price,
       title,
       description,
+      image: uploadResult.secure_url,
+      images: [uploadResult.secure_url],
     });
 
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
     console.error("Error adding product:", error);
-    res.status(500).json({ message: "Server error while adding product" });
+    res
+      .status(500)
+      .json({
+        message: "Server error while adding product",
+        error: error.message,
+      });
   }
 };
 
@@ -50,9 +64,7 @@ const deleteProductById = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findByIdAndDelete(id);
-
     if (!product) return res.status(404).json({ message: "Product not found" });
-
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error("DELETE ERROR:", error);

@@ -9,12 +9,10 @@ import {
 
 const router = express.Router();
 
-// ✅ Multer config (temporary upload before Cloudinary)
 const upload = multer({ dest: "uploads/" });
 
-// ✅ Routes
 router.get("/", getProducts);
-router.post("/add", upload.single("image"), addProduct); // <-- must include multer here
+router.post("/add", upload.single("image"), addProduct);
 router.get("/:id", getProductById);
 router.delete("/delete/:id", deleteProductById);
 

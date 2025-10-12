@@ -118,9 +118,18 @@ const Navbar = () => {
               setMenuOpen(false);
               navigate("/contactus");
             }}
-            className="bg-black text-white px-5 py-2 rounded"
+            className="bg-black text-white px-5 py-2 rounded w-full"
           >
             Contact Us
+          </button>
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/login");
+            }}
+            className="bg-blue-400 text-white text-[15px] px-6 py-1 rounded cursor-pointer w-full"
+          >
+            Login
           </button>
         </motion.div>
       )}
