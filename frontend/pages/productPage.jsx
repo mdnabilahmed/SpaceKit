@@ -77,7 +77,7 @@ const ProductPage = () => {
   // Handle Buy Now button click
   const handleBuyNow = async () => {
     try {
-      await axios.post("http://localhost:3000/api/buynow/add", {
+      await axios.post("https://api-spacekit.onrender.com/api/buynow/add", {
         name: product?.productName || product?.name,
         price: product?.price,
         image: imageUrl,
