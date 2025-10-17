@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Trash2, Plus, Minus, ArrowRight } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
-  // Vite-compatible API base
   const API_BASE =
     import.meta.env.VITE_API_BASE || "https://api-spacekit.onrender.com/api";
 
-  // Handle image fallback
   const handleImageError = (imageName) => {
     setImageErrors((prev) => ({ ...prev, [imageName]: true }));
   };
@@ -29,7 +29,6 @@ const CartPage = () => {
     />
   );
 
-  // Fetch selected products from backend
   const fetchSelectedProducts = async () => {
     try {
       setLoading(true);
@@ -47,7 +46,7 @@ const CartPage = () => {
     fetchSelectedProducts();
   }, []);
 
-  const updateQuantity = async (id, delta) => {
+  const updateQuantity = (id, delta) => {
     setCartItems((items) =>
       items
         .map((item) =>
@@ -57,12 +56,10 @@ const CartPage = () => {
         )
         .filter((item) => item.quantity > 0)
     );
-    // Optional: update backend quantity here
   };
 
-  const removeItem = async (id) => {
+  const removeItem = (id) => {
     setCartItems((items) => items.filter((item) => item._id !== id));
-    // Optional: remove item from backend
   };
 
   const subtotal = cartItems.reduce(
@@ -91,20 +88,20 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[40vh] w-full overflow-hidden">
+      <section className="relative w-full overflow-hidden">
         <ImageWithFallback
           src="/bg-img1.jpg"
           alt="Cart Background"
-          className="w-full h-full object-cover"
+          className="w-full object-cover"
           imageName="bg-cart"
         />
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute inset-0 flex items-end px-8 pb-12">
+        <div className="absolute inset-0 flex items-end px-4 md:px-8 pb-8 md:pb-12">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl text-white font-light"
+            className="text-3xl md:text-5xl text-white font-light"
           >
             Your Shopping Cart
           </motion.h1>
@@ -112,7 +109,7 @@ const CartPage = () => {
       </section>
 
       {/* Marquee */}
-      <section className="bg-black py-4">
+      <section className="bg-black py-3">
         <motion.div
           className="whitespace-nowrap text-white font-medium text-xs md:text-sm tracking-wide overflow-hidden"
           animate={{ x: ["100%", "-100%"] }}
@@ -125,39 +122,42 @@ const CartPage = () => {
       </section>
 
       {cartItems.length === 0 ? (
-        <section className="py-20 md:py-32 px-4 text-center">
+        <section className="py-16 px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-light mb-6">
+            <h2 className="text-2xl md:text-3xl font-light mb-4">
               Your Cart is Empty
             </h2>
-            <p className="text-lg text-black/60 mb-8 max-w-md mx-auto">
+            <p className="text-md md:text-lg text-black/60 mb-6 max-w-md mx-auto">
               Discover our curated collection of premium products for your
               everyday adventures.
             </p>
-            <button className="px-8 py-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 font-medium tracking-wide inline-flex items-center gap-2">
-              START SHOPPING <ArrowRight className="w-5 h-5" />
+            <button
+              onClick={() => navigate("/products")}
+              className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 font-medium inline-flex items-center gap-2"
+            >
+              START SHOPPING <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </motion.div>
         </section>
       ) : (
-        <section className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 lg:gap-12">
+        <section className="py-8 md:py-12 px-4 md:px-8 lg:px-12">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-6 md:gap-8">
             {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4 md:space-y-6">
               {cartItems.map((item, idx) => (
                 <motion.div
                   key={item._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                  className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
                 >
-                  <div className="flex flex-col sm:flex-row gap-4 p-4 md:p-6">
-                    <div className="w-full sm:w-32 md:w-40 h-48 sm:h-32 md:h-40 flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 p-3 md:p-4">
+                    <div className="w-full sm:w-28 md:w-36 h-36 sm:h-32 md:h-40 flex-shrink-0">
                       <ImageWithFallback
                         src={item.image}
                         alt={item.name}
@@ -172,45 +172,45 @@ const CartPage = () => {
                           <p className="text-xs uppercase tracking-wider text-black/50 mb-1">
                             {item.category}
                           </p>
-                          <h3 className="text-lg md:text-xl font-normal text-black">
+                          <h3 className="text-sm md:text-lg font-normal text-black">
                             {item.name}
                           </h3>
-                          <p className="text-sm text-black/60 mt-1">
+                          <p className="text-xs text-black/60 mt-1">
                             Size: {item.size}
                           </p>
                         </div>
                         <button
                           onClick={() => removeItem(item._id)}
-                          className="text-black/40 hover:text-red-500 transition-colors duration-200 p-2"
+                          className="text-black/40 hover:text-red-500 p-2 transition-colors"
                         >
-                          <Trash2 className="w-5 h-5" />
+                          <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                       </div>
 
-                      <div className="flex justify-between items-center mt-4">
-                        <div className="flex items-center gap-3 border border-gray-300 rounded-lg p-1">
+                      <div className="flex justify-between items-center mt-2 md:mt-4">
+                        <div className="flex items-center gap-2 md:gap-3 border border-gray-300 rounded-lg p-1">
                           <button
                             onClick={() => updateQuantity(item._id, -1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded transition-colors duration-200"
+                            className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center hover:bg-gray-100 rounded transition-colors"
                           >
-                            <Minus className="w-4 h-4" />
+                            <Minus className="w-3 h-3 md:w-4 md:h-4" />
                           </button>
-                          <span className="w-8 text-center font-medium">
+                          <span className="w-6 text-center text-sm md:text-base font-medium">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateQuantity(item._id, 1)}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded transition-colors duration-200"
+                            className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center hover:bg-gray-100 rounded transition-colors"
                           >
-                            <Plus className="w-4 h-4" />
+                            <Plus className="w-3 h-3 md:w-4 md:h-4" />
                           </button>
                         </div>
 
-                        <div className="text-right">
-                          <p className="text-xl md:text-2xl font-light text-black">
+                        <div className="text-right text-sm md:text-base">
+                          <p className="font-light">
                             ${(item.price * item.quantity).toFixed(2)}
                           </p>
-                          <p className="text-sm text-black/50">
+                          <p className="text-xs text-black/50">
                             ${item.price.toFixed(2)} each
                           </p>
                         </div>
@@ -222,18 +222,18 @@ const CartPage = () => {
             </div>
 
             {/* Order Summary */}
-            <div className="lg:col-span-1">
+            <div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="border border-gray-200 rounded-lg p-6 md:p-8 sticky top-6"
+                className="border border-gray-200 rounded-lg p-4 md:p-6 sticky top-4"
               >
-                <h2 className="text-2xl font-light text-black mb-6">
+                <h2 className="text-lg md:text-2xl font-light text-black mb-4">
                   ORDER SUMMARY
                 </h2>
 
-                <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
+                <div className="space-y-2 mb-4 pb-4 border-b border-gray-200">
                   <div className="flex justify-between text-black/70">
                     <span>Subtotal</span>
                     <span className="font-medium">${subtotal.toFixed(2)}</span>
@@ -248,17 +248,18 @@ const CartPage = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-between text-xl md:text-2xl font-normal text-black mb-8">
+                <div className="flex justify-between text-base md:text-lg font-normal text-black mb-4">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
 
-                <button className="w-full py-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 font-medium tracking-wide flex items-center justify-center gap-2 active:scale-95">
-                  PROCEED TO CHECKOUT <ArrowRight className="w-5 h-5" />
+                <button className="w-full py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 font-medium flex items-center justify-center gap-2 active:scale-95">
+                  PROCEED TO CHECKOUT{" "}
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
 
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-black/60 text-center">
+                <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs md:text-sm text-black/60 text-center">
                     Free shipping on orders over $150
                   </p>
                 </div>
