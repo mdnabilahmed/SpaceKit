@@ -68,7 +68,7 @@ const ProductCard = () => {
           />
           <div
             className="absolute bottom-0 left-0 w-full bg-white flex justify-between items-center px-6 border-t border-gray-200"
-            style={{ height: "130px" }}
+            style={{ height: "90px" }}
           >
             <div className="flex flex-col justify-center">
               <h2 className="text-lg md:text-xl font-semibold text-gray-900 uppercase tracking-wide">
